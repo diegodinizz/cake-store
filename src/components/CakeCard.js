@@ -8,6 +8,7 @@ const Container = styled.div`
   border-radius: 5px;
   width: auto;
   margin-right: 20px;
+  width: auto;
 `
 
 const NameContainer = styled.div`
