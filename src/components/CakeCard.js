@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Redirect } from 'react-router-dom'
 
 const Container = styled.div`
   display: flex;
@@ -9,6 +10,9 @@ const Container = styled.div`
   width: auto;
   margin-right: 20px;
   width: auto;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000;
 `
 
 const NameContainer = styled.div`
@@ -23,9 +27,14 @@ const ImageContainer = styled.img`
   height: 12em;
 `
 
-export const CakeCard = ({ name, imageUrl }) => {
+export const CakeCard = ({ name, imageUrl, onClick }) => {
+
+  const handleClick = () => {
+    return <Redirect to='/cakes' />
+  }
+
   return (
-    <Container>
+    <Container onClick={handleClick}>
       <NameContainer>{name}</NameContainer>
       <ImageContainer src={imageUrl} />
     </Container>

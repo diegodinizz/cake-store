@@ -1,13 +1,17 @@
 import React from 'react'
+import { Switch, Route } from 'react-router-dom'
 
+import { CakeDetail } from './components/CakeDetail'
 import { CakesPage } from './components/CakesPage'
 import { GlobalStyle } from './GlobalStyle'
 
 function App () {
   return (
     <div>
-      <h1>The Cake Store</h1>
-      <CakesPage />
+      <Switch>
+        <Route exact path='/' component={CakesPage} />
+        <Route path='/cakes' component={CakeDetail} />
+      </Switch>
       <GlobalStyle />
     </div>
   )

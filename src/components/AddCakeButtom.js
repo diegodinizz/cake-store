@@ -16,6 +16,7 @@ const Container = styled.button`
   background-color: #f56a79;
   color: white;
   border-radius: 5px;
+  outline: none;
 
   &:hover {
     background-color: white;

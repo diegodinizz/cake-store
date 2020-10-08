@@ -16,6 +16,8 @@ const CakesContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   margin: 0 25%;
+  text-decoration: none;
+  color: #000;
 `
 
 const ButtomContainer = styled.div`
@@ -24,7 +26,7 @@ const ButtomContainer = styled.div`
   margin-top: 20px;
 `
 
-export const CakesPage = () => {
+export const CakesPage = ({ onClick }) => {
   const [cakesData, setcakesData] = useState([])
 
   useEffect(() => {
@@ -33,13 +35,20 @@ export const CakesPage = () => {
 
   return (
     <Container>
+      <h1>The Cake Store</h1>
       <CakesContainer>
-        {cakesData.map(item => (
-          <CakeCard key={item.id} name={item.name} imageUrl={item.imageUrl} />
+        {cakesData.map(({ id, name, imageUrl, ...otherCakeProps }) => (
+          <CakeCard
+            onClick={onClick}
+            key={id}
+            name={name}
+            imageUrl={imageUrl}
+            {...otherCakeProps}
+          />
         ))}
       </CakesContainer>
       <ButtomContainer>
-      <AddCakeButton />
+        <AddCakeButton />
       </ButtomContainer>
     </Container>
   )
