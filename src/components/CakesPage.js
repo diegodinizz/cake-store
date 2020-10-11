@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { CakeCard } from './CakeCard'
 
-import CAKES_DATA from '../cakes.data'
+// import CAKES_DATA from '../cakes.data'
 import { AddCakeButton } from './AddCakeButtom'
 
 const Container = styled.div`
@@ -26,12 +26,15 @@ const ButtomContainer = styled.div`
   margin-top: 20px;
 `
 
-export const CakesPage = ({ onClick }) => {
+export const CakesPage = () => {
   const [cakesData, setcakesData] = useState([])
 
   useEffect(() => {
-    setcakesData(CAKES_DATA)
-  }, [])
+    // setcakesData(CAKES_DATA)
+    fetch('https://wyplmq4y7g.execute-api.us-east-1.amazonaws.com/beta').then(
+      response => response.json().then(data => setcakesData(data.Items))
+    )
+  }, [cakesData])
 
   return (
     <Container>
@@ -39,7 +42,6 @@ export const CakesPage = ({ onClick }) => {
       <CakesContainer>
         {cakesData.map(({ id, name, imageUrl, ...otherCakeProps }) => (
           <CakeCard
-            onClick={onClick}
             key={id}
             name={name}
             imageUrl={imageUrl}
