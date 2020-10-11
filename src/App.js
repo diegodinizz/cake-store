@@ -1,17 +1,19 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+// import { Switch, Route } from 'react-router-dom'
 
-import { CakeDetail } from './components/CakeDetail'
-import { CakesPage } from './components/CakesPage'
+// import { CakeDetail } from './components/CakeDetail'
+// import { CakesPage } from './components/CakesPage'
 import { GlobalStyle } from './GlobalStyle'
+import { Routes } from './Routes'
 
 function App () {
   return (
     <div>
-      <Switch>
+      {/* <Switch>
         <Route exact path='/' component={CakesPage} />
         <Route path='/cakes' component={CakeDetail} />
-      </Switch>
+      </Switch> */}
+      <Routes />
       <GlobalStyle />
     </div>
   )
