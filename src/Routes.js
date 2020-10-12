@@ -11,7 +11,7 @@ export const Routes = () => {
       <Route exact path='/'>
         <Home />
       </Route>
-      <Route path='/new'>
+      <Route path='/cakes/new'>
         <NewCake />
       </Route>
       {/* Catch all unmatched routes */}

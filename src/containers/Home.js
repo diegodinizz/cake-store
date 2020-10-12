@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { API } from 'aws-amplify'
 
 import { CakeCard } from '../components/CakeCard'
-import { AddCakeButton } from '../components/AddCakeButtom'
+import { CustomButton } from '../components/CustomButton'
 
 const Container = styled.div`
   display: flex;
@@ -44,8 +44,8 @@ const CakesContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 0 25%;
-  text-decoration: none;
+  margin: 0 auto;
+  /* text-decoration: none; */
   color: #000;
 `
 
@@ -106,8 +106,8 @@ export const Home = () => {
     <Container>
       <h1>The Cake Store</h1>
       {isLoading ? renderSpinner() : renderCakesList(cakes)}
-      <ButtomContainer to='/new'>
-        <AddCakeButton />
+      <ButtomContainer to='/cakes/new'>
+        <CustomButton>add cake</CustomButton>
       </ButtomContainer>
     </Container>
   )

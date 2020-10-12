@@ -25,6 +25,6 @@ const Container = styled.button`
   }
 `
 
-export const AddCakeButton = () => {
-  return <Container>add cake</Container>
+export const CustomButton = ({ children }) => {
+  return <Container>{children}</Container>
 }

@@ -8,7 +8,7 @@ const Container = styled.div`
   border: 1px solid #52575d;
   border-radius: 5px;
   width: auto;
-  margin-right: 20px;
+  /* margin-right: 20px; */
   width: auto;
   cursor: pointer;
   text-decoration: none;
