@@ -14,6 +14,10 @@ const Container = styled.div`
   flex-direction: column;
   margin: 0 auto;
   width: 27vw;
+
+  @media (max-width: 800px) {
+    width: 80%;
+  }
 `
 
 const CommentLabel = styled.label`
@@ -34,6 +38,10 @@ const CommentContainer = styled.textarea`
   height: 150px;
   font-size: 18px;
   color: grey;
+
+  @media (max-width: 800px) {
+    width: 98%;
+  }
 
   &:focus {
     outline-color: grey;
@@ -59,6 +67,11 @@ const ButtomContainer = styled.div`
   justify-content: center;
   margin-top: 20px;
   text-decoration: none;
+
+  @media (max-width: 800px) {
+    width: 80%;
+    margin-top: 60px;
+  }
 `
 
 export const NewCake = () => {

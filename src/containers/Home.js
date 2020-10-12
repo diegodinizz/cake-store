@@ -20,6 +20,11 @@ const CakesContainer = styled.div`
   justify-content: space-evenly;
   margin: 0 25%;
   flex-wrap: wrap;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    margin: 0 auto;
+  }
 `
 
 const ButtomContainer = styled(Link)`
@@ -27,6 +32,10 @@ const ButtomContainer = styled(Link)`
   justify-content: center;
   margin-top: 30px;
   text-decoration: none;
+
+  @media (max-width: 800px) {
+    margin-top: 40px;
+  }
 `
 
 export const Home = () => {

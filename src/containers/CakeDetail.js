@@ -13,6 +13,10 @@ const Container = styled.div`
   flex-direction: column;
   width: 27vw;
   margin: 0 auto;
+
+  @media (max-width: 800px) {
+    width: 90%;
+  }
 `
 
 const CakeContainer = styled.div`
@@ -21,6 +25,11 @@ const CakeContainer = styled.div`
   border: 1px solid grey;
   box-shadow: 1px 1px 1px #ccc;
   border-radius: 5px;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    width: 100%;
+  }
 `
 
 const DetailContainer = styled.div`
@@ -35,6 +44,10 @@ const ImageContainer = styled.img`
   padding: 5px;
   width: 15em;
   min-height: 15em;
+
+  @media (max-width: 800px) {
+    width: 97%;
+  }
 `
 
 const Name = styled.p`
