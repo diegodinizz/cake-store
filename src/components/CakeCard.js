@@ -1,14 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-const Container = styled.div`
+const Container = styled(Link)`
   display: flex;
   flex-direction: column;
   border: 1px solid #52575d;
   border-radius: 5px;
   width: auto;
-  /* margin-right: 20px; */
+  margin-top: 20px;
   width: auto;
   cursor: pointer;
   text-decoration: none;
@@ -27,14 +27,10 @@ const ImageContainer = styled.img`
   height: 12em;
 `
 
-export const CakeCard = ({ name, imageUrl, onClick }) => {
-
-  const handleClick = () => {
-    return <Redirect to='/cakes' />
-  }
+export const CakeCard = ({ name, imageUrl, id }) => {
 
   return (
-    <Container onClick={handleClick}>
+    <Container to={`/cakes/${id}`}>
       <NameContainer>{name}</NameContainer>
       <ImageContainer src={imageUrl} />
     </Container>

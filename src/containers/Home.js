@@ -6,6 +6,8 @@ import { API } from 'aws-amplify'
 import { CakeCard } from '../components/CakeCard'
 import { CustomButton } from '../components/CustomButton'
 
+import { onError } from '../libs/errorLib'
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -43,10 +45,9 @@ const SpinnerContainer = styled.div`
 const CakesContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  margin: 0 auto;
-  /* text-decoration: none; */
-  color: #000;
+  justify-content: space-evenly;
+  margin: 0 25%;
+  flex-wrap: wrap;
 `
 
 const ButtomContainer = styled(Link)`
@@ -68,27 +69,24 @@ export const Home = () => {
       return API.get(apiName, path)
     }
 
-    async function handleResponse () {
-      const response = await getData()
-      setCakes(response)
-      setIsLoading(false)
+    async function onLoad () {
+      try {
+        const response = await getData()
+        setCakes(response)
+        setIsLoading(false)
+      } catch (error) {
+        onError(error)
+      }
     }
 
-    handleResponse().catch(error => {
-      console.log(error.response)
-    })
-  }, [isLoading])
+    onLoad()
+  }, [])
 
   function renderCakesList (cakes) {
     return (
       <CakesContainer>
-        {cakes.map(({ id, name, imageUrl, ...otherCakeProps }) => (
-          <CakeCard
-            key={id}
-            name={name}
-            imageUrl={imageUrl}
-            {...otherCakeProps}
-          />
+        {cakes.map(({ id, name, imageUrl }) => (
+          <CakeCard key={id} id={id} name={name} imageUrl={imageUrl} />
         ))}
       </CakesContainer>
     )

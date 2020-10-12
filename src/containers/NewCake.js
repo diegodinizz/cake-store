@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import { API } from 'aws-amplify'
 
 import { CustomButton } from '../components/CustomButton'
 import { FormInput } from '../components/FormInput'
 import { BackButton } from '../components/BackButton'
+
+import { onError } from '../libs/errorLib'
 
 const Container = styled.div`
   display: flex;
@@ -24,24 +27,16 @@ const CommentLabel = styled.label`
 const CommentContainer = styled.textarea`
   padding: 10px;
   line-height: 1.5;
-  /* border-radius: 5px; */
   border: 1px solid grey;
   box-shadow: 1px 1px 1px #999;
-  /* letter-spacing: 0.8px; */
-  /* border-bottom: 1px solid grey; */
   resize: none;
   width: 27vw;
   height: 150px;
-  /* margin-top: 10px; */
   font-size: 18px;
   color: grey;
 
   &:focus {
     outline-color: grey;
-  }
-
-  textarea:invalid {
-    border: 2px dashed red;
   }
 `
 
@@ -51,8 +46,7 @@ const YumLabel = styled(CommentLabel)`
 
 const YumContainer = styled.select`
   border: 1px solid grey;
-  width: 2rem;
-  width: 3rem;
+  width: auto;
   height: 1.5rem;
 
   &:focus {
@@ -60,7 +54,7 @@ const YumContainer = styled.select`
   }
 `
 
-const ButtomContainer = styled(Link)`
+const ButtomContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 20px;
@@ -70,24 +64,39 @@ const ButtomContainer = styled(Link)`
 export const NewCake = () => {
   const [name, setName] = useState('')
   const [comment, setComment] = useState('')
-  const [yumFactor, setYumFactor] = useState('')
+  const imageUrl = 'https://i.ibb.co/wdnsWYt/cake-image.png'
+  const [yumFactor, setYumFactor] = useState(undefined)
+  const history = useHistory()
 
   async function handleSubmit (event) {
     event.preventDefault()
+
+    function createCake () {
+      const apiName = 'cakes'
+      const path = '/cakes'
+      const myCake = {
+        body: { name, comment, imageUrl, yumFactor }
+      }
+
+      return API.post(apiName, path, myCake)
+    }
+
+    if (comment.length < 5 || comment.length > 200) {
+      alert('Comment must be between 5 and 200 words!')
+      return
+    }
+    if (yumFactor === undefined) {
+      alert('You must select a yum factor between 1 and 5')
+      return
+    } else {
+      try {
+        await createCake()
+        history.push('/')
+      } catch (error) {
+        onError(error)
+      }
+    }
   }
-
-  // function handleChange (event) {
-  //   // setName(event.target.value)
-
-  //   const { name, value } = event.target
-
-  //   if (name === 'name') {
-  //     setName(value)
-  //   }
-  //   if (name === 'comment') {
-  //     setComment(value)
-  //   }
-  // }
 
   return (
     <Container>
@@ -106,8 +115,8 @@ export const NewCake = () => {
           name='comment'
           value={comment}
           onChange={event => setComment(event.target.value)}
-          minLength='5'
-          maxLength='250'
+          // minLength='5'
+          maxLength='200'
           required
         />
         <YumLabel>Yum Factor</YumLabel>
@@ -116,17 +125,20 @@ export const NewCake = () => {
           value={yumFactor}
           onChange={event => setYumFactor(event.target.value)}
         >
+          <option value=''>Select a yummy factor</option>
           <option value='1'>1</option>
           <option value='2'>2</option>
           <option value='3'>3</option>
           <option value='4'>4</option>
           <option value='5'>5</option>
         </YumContainer>
-        <ButtomContainer to='/'>
+        <ButtomContainer>
           <CustomButton type='submit'>submit</CustomButton>
         </ButtomContainer>
       </form>
+      <div>
       <BackButton to='/'>&#8592; Back</BackButton>
+      </div>
     </Container>
   )
 }
