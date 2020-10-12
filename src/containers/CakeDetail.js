@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 import { API } from 'aws-amplify'
 
 import { BackButton } from '../components/BackButton'
+import { Spinner } from '../components/Spinner'
+
 import { onError } from '../libs/errorLib'
 
 const Container = styled.div`
@@ -69,6 +71,7 @@ export const CakeDetail = () => {
   const [comment, setComment] = useState('')
   const [imageUrl, setImageUrl] = useState('')
   const [yumFactor, setYumFactor] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
   const { id } = useParams()
 
   useEffect(() => {
@@ -85,6 +88,7 @@ export const CakeDetail = () => {
         setComment(comment)
         setImageUrl(imageUrl)
         setYumFactor(yumFactor)
+        setIsLoading(false)
       } catch (error) {
         onError(error)
       }
@@ -93,9 +97,8 @@ export const CakeDetail = () => {
     onLoad()
   }, [id])
 
-  return (
-    <Container>
-      <h1>Cake Detail</h1>
+  function renderCakeContainer () {
+    return (
       <CakeContainer>
         <ImageContainer src={imageUrl} />
         <DetailContainer>
@@ -107,6 +110,13 @@ export const CakeDetail = () => {
           </YumFactorContainer>
         </DetailContainer>
       </CakeContainer>
+    )
+  }
+
+  return (
+    <Container>
+      <h1>Cake Detail</h1>
+      {isLoading ? Spinner() : renderCakeContainer()}
       <div>
       <BackButton to='/'>&#8592; Back</BackButton>
       </div>

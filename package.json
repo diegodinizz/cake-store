@@ -1,5 +1,5 @@
 {
-  "name": "the-cake-store-client",
+  "name": "cake-store",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

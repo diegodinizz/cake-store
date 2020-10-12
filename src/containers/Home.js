@@ -5,41 +5,13 @@ import { API } from 'aws-amplify'
 
 import { CakeCard } from '../components/CakeCard'
 import { CustomButton } from '../components/CustomButton'
+import { Spinner } from '../components/Spinner'
 
 import { onError } from '../libs/errorLib'
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-`
-
-const SpinnerOverlay = styled.div`
-  height: 60vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-const SpinnerContainer = styled.div`
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  border: 3px solid rgba(195, 195, 195, 0.6);
-  border-radius: 50%;
-  border-top-color: #636767;
-  animation: spin 1s ease-in-out infinite;
-  -webkit-animation: spin 1s ease-in-out infinite;
-  @keyframes spin {
-    to {
-      -webkit-transform: rotate(360deg);
-    }
-  }
-  @-webkit-keyframes spin {
-    to {
-      -webkit-transform: rotate(360deg);
-    }
-  }
 `
 
 const CakesContainer = styled.div`
@@ -53,7 +25,7 @@ const CakesContainer = styled.div`
 const ButtomContainer = styled(Link)`
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 30px;
   text-decoration: none;
 `
 
@@ -92,18 +64,10 @@ export const Home = () => {
     )
   }
 
-  function renderSpinner () {
-    return (
-      <SpinnerOverlay>
-        <SpinnerContainer />
-      </SpinnerOverlay>
-    )
-  }
-
   return (
     <Container>
       <h1>The Cake Store</h1>
-      {isLoading ? renderSpinner() : renderCakesList(cakes)}
+      {isLoading ? Spinner() : renderCakesList(cakes)}
       <ButtomContainer to='/cakes/new'>
         <CustomButton>add cake</CustomButton>
       </ButtomContainer>

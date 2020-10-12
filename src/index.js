@@ -8,17 +8,13 @@ import config from './config';
 import * as serviceWorker from './serviceWorker';
 
 Amplify.configure({
-  Storage: {
-    region: config.s3.REGION,
-    bucket: config.s3.BUCKET
-  },
   API: {
     endpoints: [
       {
         name: "cakes",
         endpoint: config.apiGateway.URL,
         region: config.apiGateway.REGION
-      },
+      }
     ]
   }
 });
