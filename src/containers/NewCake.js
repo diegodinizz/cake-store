@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 import { API } from 'aws-amplify'
@@ -79,7 +79,21 @@ export const NewCake = () => {
   const [comment, setComment] = useState('')
   const imageUrl = 'https://i.ibb.co/wdnsWYt/cake-image.png'
   const [yumFactor, setYumFactor] = useState(undefined)
+  const [nameList, setNameList] = useState([])
   const history = useHistory()
+
+  useEffect(() => {
+    async function onLoad () {
+      try {
+        const response = await API.get('cakes', '/cakes')
+        response.map(item => setNameList(item.name))
+      } catch (error) {
+        onError(error)
+      }
+    }
+
+    onLoad()
+  }, [])
 
   async function handleSubmit (event) {
     event.preventDefault()
@@ -94,18 +108,9 @@ export const NewCake = () => {
       return API.post(apiName, path, myCake)
     }
 
-    async function checkCakeName () {
-      const response = await API.get('cakes', '/cakes')
-      response.forEach(element => {
-        if (element.name === name) {
-          alert(`${name} already exists!`)
-          setName('')
-        }
-      })
-    }
-
-    if (name.length) {
-      checkCakeName()
+    if (nameList.includes(name)) {
+      alert(`${name} already exists!`)
+      setName('')
       return
     }
     if (comment.length < 5 || comment.length > 200) {

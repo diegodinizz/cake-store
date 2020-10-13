@@ -5,7 +5,7 @@ export const GlobalStyle = createGlobalStyle`
 body {
   font-family: 'Rubik', sans-serif;
   letter-spacing: 1px;
-  padding: 10vh 10vw 0 10vw;
+  padding: 4rem;
   color: #121314;
   margin: 0 auto;
 
