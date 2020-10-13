@@ -1,6 +1,6 @@
 ## The Cake Store
 
-It’s all about cakes! The Cake Store is an serverless application that can allow a user to view and add to a list of favorite cakes.
+It’s all about cakes! The Cake Store is an serverless application built with React, AWS Gateway API, AWS Lambda and AWS DynamoDB. The application allows the user to view and add to a list of favorite cakes.
 
 <img width="1680" alt="screen" src="https://user-images.githubusercontent.com/47988806/95799401-71715500-0cec-11eb-8e08-30e8d627e942.png">
 
