@@ -94,6 +94,20 @@ export const NewCake = () => {
       return API.post(apiName, path, myCake)
     }
 
+    async function checkCakeName () {
+      const response = await API.get('cakes', '/cakes')
+      response.forEach(element => {
+        if (element.name === name) {
+          alert(`${name} already exists!`)
+          setName('')
+        }
+      })
+    }
+
+    if (name.length) {
+      checkCakeName()
+      return
+    }
     if (comment.length < 5 || comment.length > 200) {
       alert('Comment must be between 5 and 200 words!')
       return
@@ -128,7 +142,7 @@ export const NewCake = () => {
           name='comment'
           value={comment}
           onChange={event => setComment(event.target.value)}
-          // minLength='5'
+          minLength='5'
           maxLength='200'
           required
         />
@@ -150,7 +164,7 @@ export const NewCake = () => {
         </ButtomContainer>
       </form>
       <div>
-      <BackButton to='/'>&#8592; Back</BackButton>
+        <BackButton to='/'>&#8592; Back</BackButton>
       </div>
     </Container>
   )
