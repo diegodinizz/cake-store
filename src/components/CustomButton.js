@@ -12,7 +12,6 @@ const Container = styled.button`
   cursor: pointer;
   display: flex;
   justify-content: center;
-  width: 15%;
   background-color: #f56a79;
   color: white;
   border-radius: 5px;

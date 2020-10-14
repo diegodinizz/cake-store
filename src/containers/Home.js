@@ -34,7 +34,8 @@ const ButtomContainer = styled(Link)`
   text-decoration: none;
 
   @media (max-width: 800px) {
-    margin-top: 40px;
+    width: 45%;
+    margin: 30px auto;
   }
 `
 

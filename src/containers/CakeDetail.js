@@ -11,7 +11,7 @@ import { onError } from '../libs/errorLib'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 27vw;
+  width: 27rem;
   margin: 0 auto;
 
   @media (max-width: 800px) {
@@ -43,7 +43,7 @@ const ImageContainer = styled.img`
   border-radius: 7px;
   padding: 5px;
   width: 15em;
-  min-height: 15em;
+  height: 15em;
 
   @media (max-width: 800px) {
     width: 97%;
