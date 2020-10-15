@@ -13,6 +13,12 @@ const Container = styled(Link)`
   cursor: pointer;
   text-decoration: none;
   color: #000;
+  transform: translateZ(0);
+  transition: transform 0.25s ease-out;
+
+  :hover {
+    transform: scale(1.05);
+  }
 `
 
 const NameContainer = styled.div`
@@ -28,7 +34,6 @@ const ImageContainer = styled.img`
 `
 
 export const CakeCard = ({ name, imageUrl, id }) => {
-
   return (
     <Container to={`/cakes/${id}`}>
       <NameContainer>{name}</NameContainer>

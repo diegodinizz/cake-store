@@ -44,7 +44,7 @@ const CommentContainer = styled.textarea`
   }
 
   &:focus {
-    outline-color: grey;
+    outline: none;
   }
 `
 
@@ -57,8 +57,12 @@ const YumContainer = styled.select`
   width: auto;
   height: 1.5rem;
 
+  @media (max-width: 800px) {
+    margin-bottom: 50px;
+  }
+
   &:focus {
-    outline-color: grey;
+    outline: none;
   }
 `
 
@@ -70,7 +74,7 @@ const ButtomContainer = styled.div`
 
   @media (max-width: 800px) {
     width: 80%;
-    margin-top: 60px;
+    margin: 0 auto;
   }
 `
 

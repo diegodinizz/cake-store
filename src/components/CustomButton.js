@@ -18,11 +18,11 @@ const Container = styled.button`
   outline: none;
 
   @media (max-width: 800px) {
-    width: 60%;
+    width: 100%;
   }
 
   &:hover {
-    background-color: white;
+    background-color: #f6f6f6;
     color: black;
     border: 1px solid black;
   }

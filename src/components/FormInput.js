@@ -16,8 +16,7 @@ const Container = styled.div`
 `
 
 const InputContainer = styled.input`
-  background: none;
-  background-color: white;
+  background-color: #f6f6f6;
   color: ${subColor};
   font-size: 18px;
   padding: 10px 10px 10px 5px;

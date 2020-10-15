@@ -8,6 +8,7 @@ body {
   padding: 4rem;
   color: #121314;
   margin: 0 auto;
+  background-color: #f6f6f6;
 
   @media (max-width: 800px) {
     margin: 1em;
@@ -22,7 +23,7 @@ h1 {
   margin: 0 0 30px 0;
 
   @media (max-width: 800px) {
-    margin: 0 0 20px 0;
+    margin: 20px 0;
     font-size: 30px;
   }
 }

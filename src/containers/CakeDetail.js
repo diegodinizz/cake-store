@@ -11,11 +11,11 @@ import { onError } from '../libs/errorLib'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 27rem;
+  width: 32rem;
   margin: 0 auto;
 
   @media (max-width: 800px) {
-    width: 90%;
+    width: 75%;
   }
 `
 
@@ -35,18 +35,18 @@ const CakeContainer = styled.div`
 const DetailContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 15px;
-  position: relative;
+  padding: 10px;
 `
 
 const ImageContainer = styled.img`
   border-radius: 7px;
   padding: 5px;
-  width: 15em;
-  height: 15em;
+  max-width: 15rem;
+  max-height: 15rem;
 
   @media (max-width: 800px) {
-    width: 97%;
+    max-width: 100%;
+    max-height: 100%;
   }
 `
 
@@ -65,11 +65,11 @@ const YumFactorContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: baseline;
-  margin-top: 10px;
 `
 
 const YumFactor = styled.p`
   font-size: 1em;
+  margin: 0;
 `
 
 const Level = styled.p`
@@ -131,7 +131,7 @@ export const CakeDetail = () => {
       <h1>Cake Detail</h1>
       {isLoading ? Spinner() : renderCakeContainer()}
       <div>
-      <BackButton to='/'>&#8592; Back</BackButton>
+        <BackButton to='/'>&#8592; Back</BackButton>
       </div>
     </Container>
   )
