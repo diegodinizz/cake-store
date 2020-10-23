@@ -90,7 +90,7 @@ export const NewCake = () => {
     async function onLoad () {
       try {
         const response = await API.get('cakes', '/cakes')
-        response.map(item => setNameList(item.name))
+        setNameList(response.map(({ name }) => name))
       } catch (error) {
         onError(error)
       }
@@ -117,11 +117,11 @@ export const NewCake = () => {
       setName('')
       return
     }
-    if (comment.length < 5 || comment.length > 200) {
+    else if (comment.length < 5 || comment.length > 200) {
       alert('Comment must be between 5 and 200 words!')
       return
     }
-    if (yumFactor === undefined) {
+    else if (yumFactor === undefined) {
       alert('You must select a yum factor between 1 and 5')
       return
     } else {

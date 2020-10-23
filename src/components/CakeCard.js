@@ -13,7 +13,7 @@ const Container = styled(Link)`
   cursor: pointer;
   text-decoration: none;
   color: #000;
-  transform: translateZ(0);
+  transform: translateZ(0.1);
   transition: transform 0.25s ease-out;
 
   :hover {
@@ -29,8 +29,8 @@ const NameContainer = styled.div`
 const ImageContainer = styled.img`
   border-radius: 7px;
   padding: 5px;
-  width: 12em;
-  height: 12em;
+  width: 12rem;
+  height: 12rem;
 `
 
 export const CakeCard = ({ name, imageUrl, id }) => {

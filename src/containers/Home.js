@@ -30,8 +30,9 @@ const CakesContainer = styled.div`
 const ButtomContainer = styled(Link)`
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  margin: 40px auto;
   text-decoration: none;
+  width: 150px;
 
   @media (max-width: 800px) {
     width: 45%;

@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { API } from 'aws-amplify'
 
 import { BackButton } from '../components/BackButton'
 import { Spinner } from '../components/Spinner'
+import { CustomButton } from '../components/CustomButton'
 
 import { onError } from '../libs/errorLib'
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 32rem;
+  width: ${props => (props.size.length > 100 ? '44rem' : '32rem')};
   margin: 0 auto;
 
   @media (max-width: 800px) {
-    width: 75%;
+    width: 80%;
   }
 `
 
@@ -41,12 +42,12 @@ const DetailContainer = styled.div`
 const ImageContainer = styled.img`
   border-radius: 7px;
   padding: 5px;
-  max-width: 15rem;
-  max-height: 15rem;
+  width: 15rem;
+  height: 15rem;
 
   @media (max-width: 800px) {
-    max-width: 100%;
-    max-height: 100%;
+    width: 97%;
+    height: 100%;
   }
 `
 
@@ -79,6 +80,18 @@ const Level = styled.p`
   font-weight: 500;
 `
 
+const ButtomContainer = styled.div`
+  display: flex;
+  margin-top: 20px;
+  text-decoration: none;
+  width: 30%;
+
+  @media (max-width: 800px) {
+    width: 60%;
+    margin: 20px auto;
+  }
+`
+
 export const CakeDetail = () => {
   const [name, setName] = useState('')
   const [comment, setComment] = useState('')
@@ -86,6 +99,30 @@ export const CakeDetail = () => {
   const [yumFactor, setYumFactor] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const { id } = useParams()
+  const history = useHistory()
+
+  function deleteCake () {
+    return API.del('cakes', `/cakes/${id}`)
+  }
+
+  async function handleDelete (event) {
+    event.preventDefault()
+
+    const confirmed = window.confirm(
+      'Are you sure you want to delete this cake?'
+    )
+
+    if (!confirmed) {
+      return
+    }
+
+    try {
+      await deleteCake()
+      history.push('/')
+    } catch (e) {
+      onError(e)
+    }
+  }
 
   useEffect(() => {
     function loadCake () {
@@ -111,23 +148,42 @@ export const CakeDetail = () => {
   }, [id])
 
   function renderCakeContainer () {
-    return (
-      <CakeContainer>
-        <ImageContainer src={imageUrl} />
-        <DetailContainer>
-          <Name>{name}</Name>
-          <Comment>{comment}</Comment>
-          <YumFactorContainer>
-            <YumFactor>Yum Factor:</YumFactor>
-            <Level>{yumFactor}</Level>
-          </YumFactorContainer>
-        </DetailContainer>
-      </CakeContainer>
-    )
+    if (name === 'Chocolate' || name === 'Carrot') {
+      return (
+        <CakeContainer>
+          <ImageContainer src={imageUrl} />
+          <DetailContainer>
+            <Name>{name}</Name>
+            <Comment>{comment}</Comment>
+            <YumFactorContainer>
+              <YumFactor>Yum Factor:</YumFactor>
+              <Level>{yumFactor}</Level>
+            </YumFactorContainer>
+          </DetailContainer>
+        </CakeContainer>
+      )
+    } else {
+      return (
+        <CakeContainer>
+          <ImageContainer src={imageUrl} />
+          <DetailContainer>
+            <Name>{name}</Name>
+            <Comment>{comment}</Comment>
+            <YumFactorContainer>
+              <YumFactor>Yum Factor:</YumFactor>
+              <Level>{yumFactor}</Level>
+            </YumFactorContainer>
+            <ButtomContainer onClick={handleDelete}>
+              <CustomButton>delete</CustomButton>
+            </ButtomContainer>
+          </DetailContainer>
+        </CakeContainer>
+      )
+    }
   }
 
   return (
-    <Container>
+    <Container size={comment}>
       <h1>Cake Detail</h1>
       {isLoading ? Spinner() : renderCakeContainer()}
       <div>
